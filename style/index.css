@@ -9,10 +9,8 @@ body {
     rgb(42, 129, 53)
   );
 }
-h1 {
-  font-family: 'Satisfy', cursive;
-}
 .main-div {
+  flex: content;
   text-align: center;
   background-image: url(../images/table-image.jpg);
   background-size: inherit;
@@ -28,10 +26,9 @@ h1 {
   margin: auto;
 }
 h1 {
-  text-align: center;
   font-family: 'Permanent Marker', cursive;
-  font-size: xx-large;
-  padding: 50px;
+  font-size: 75px;
+  padding: 5px;
   color: goldenrod;
 }
 .button-common {
