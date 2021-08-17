@@ -1,13 +1,8 @@
-let cardsArray = [8,11]
+let cardsArray =[]
 let hasBlackJack = false
-let isAlive = true
+let isAlive = false
 let message = 'Do you wanna give it a shot?'
 let sum = 0
-cardsArray.forEach(card =>{
-    sum += card
-})
-
-console.log("sum"+sum)
 
 
 let continueGame = document.getElementById('btn-new-card')
@@ -21,21 +16,32 @@ let cardsEl= document.getElementById('cards-el')
 messageEl.textContent = message
 
 function fnStartGame(){
+
+    cardsArray = [getRandomCard(), getRandomCard()]
+    cardsArray.forEach(card =>{
+        sum += card
+    })
+    hasBlackJack = false
+    isAlive = true
     fnPlayGame()
+    
 }
+
 function fnPlayGame(){
     if (sum <= 20){
         message = 'Do you want to draw another card?'
     } else if (sum === 21){
-        message = "Congradulations, That's a BlackJack"
+        continueGame.hidden = true
+        message = "Congratulations, That's a BlackJack"
         hasBlackJack = true
     } else{
+        continueGame.hidden = true
         message = 'You are out of the game, better luck next time.'
         isAlive = false 
     }
     
-    console.log(isAlive)
-    if(isAlive){
+
+    if(isAlive && !hasBlackJack){
         continueGame.hidden = false
     }
     saveGame.hidden = false
@@ -47,16 +53,24 @@ function fnPlayGame(){
 }
 
 function fnSaveGame(){
+
+    messageEl.textContent = 'Do you wanna give it a shot?'
+    sumEl.textContent = ''
+    cardsEl.textContent = ''
     continueGame.hidden = true
     startGame.hidden = false
     saveGame.hidden = true
+
+    sum = 0
+    cardsArray.length = 0
+    
 }
 
 function fnDrawNewCard(){
     message = 'Drawing a new card from the deck'
     messageEl.textContent = message
 
-    cardsArray.push(7)
+    cardsArray.push(getRandomCard())
     sum = 0
     cardsArray.forEach(card =>{
         sum += card
@@ -66,3 +80,19 @@ function fnDrawNewCard(){
 
 }
 
+function getRandomCard(){
+
+    let randomCard = Math.floor(Math.random() * 13) + 1
+    console.log(randomCard)
+    if (randomCard === 1){
+        return 11
+    }
+    else if(randomCard >= 11 && randomCard <= 13){
+        return 10
+    }
+    else{
+        return randomCard
+    }
+}
+
+console.log(getRandomCard())
